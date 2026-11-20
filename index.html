@@ -67,9 +67,18 @@ header{position:relative;z-index:2}
 .hero p{padding-left:1.1rem;border-left:2px solid var(--gold)}
 h2{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:300;letter-spacing:-.01em}
 .how{background:var(--surface);padding:clamp(2.5rem,6vw,4rem) 0;margin-bottom:clamp(3rem,7vw,5rem)}
-.how ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.how li{padding:0 1.5rem;border-left:1px solid var(--line)}
+.how ul{list-style:none;margin:0;padding:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.how ul::-webkit-scrollbar{display:none}
+.how li{flex:0 0 25%;scroll-snap-align:start;padding:0 1.5rem;border-left:1px solid var(--line)}
 .how li:first-child{padding-left:0;border-left:0}
+.how-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:2rem}
+.how-head h2{margin:0 0 .6rem}
+.how .lead{max-width:40rem;margin:0;color:var(--muted);font-size:1.02rem}
+.arrows{display:flex;gap:.5rem;flex-shrink:0}
+.arrows button{width:2.6rem;height:2.6rem;padding:0;display:grid;place-items:center;border-radius:50%;background:var(--card)}
+.arrows button:disabled{opacity:.35;cursor:default}
+.arrows button:disabled:hover{border-color:var(--line)}
+.arrows svg{width:1.1rem;height:1.1rem}
 .how h3{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:1.2rem;margin:0 0 .5rem;color:var(--lilac)}
 .how p{margin:0;color:var(--muted);font-size:.95rem}
 .p{box-shadow:0 1px 0 var(--line);transition:border-color .25s,box-shadow .25s,transform .25s}
@@ -85,55 +94,60 @@ h2{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:300;letter-spacing:-.01em}
 .btns a.main{background:var(--lilac);border-color:var(--lilac);color:var(--bg)}
 .btns a.main:hover{color:var(--bg);filter:brightness(1.08)}
 .contact p.loc{margin:0;color:var(--muted)}
-@media (max-width:860px){.how ul{grid-template-columns:repeat(2,1fr);gap:2rem 0}.how li:nth-child(odd){padding-left:0;border-left:0}}
-@media (max-width:520px){.how ul{grid-template-columns:1fr}.how li{padding:0;border-left:0}.hero::after{display:none}.nav a{display:none}}
+@media (max-width:860px){.how li{flex-basis:50%}}
+@media (max-width:520px){.how li{flex-basis:85%;padding:0 1rem 0 0;border-left:0}.hero::after{display:none}.nav a{display:none}}
 @media (max-width:760px){.grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><span>Portafolio</span><div class="nav"><a href="#proyectos">Páginas</a><a href="#contacto">Contacto</a><button id="tema" type="button" aria-label="Cambiar entre tema claro y oscuro">Cambiar tema</button></div></header>
+<header><span>Portafolio</span><div class="nav"><a href="#proyectos">Proyectos</a><a href="#contacto">Contacto</a><button id="tema" type="button" aria-label="Cambiar entre tema claro y oscuro">Cambiar tema</button></div></header>
 <main>
 <div class="hero">
 <h1>Rebeca <em>Ortiz Flores</em></h1>
-<p>Estudiante de Ingeniería Mecatrónica. Páginas web para negocios. <b>Adaptadas a las necesidades de tu negocio</b>. </p>
+<p>Estudiante de Ingeniería Mecatrónica. Diseño y desarrollo sitios web para negocios, <b>a la medida de cada marca y de sus clientes</b>.</p>
 </div>
 </div>
-<div class="how"><div class="wrap"><h2>Lo que llevan mis páginas</h2><ul>
-<li><h3>Citas por WhatsApp</h3><p>Cada servicio o paquete abre WhatsApp con el mensaje listo.</p></li>
-<li><h3>Cotizadores</h3><p>El cliente elige áreas, servicios o invitados y pide su cotización.</p></li>
-<li><h3>Catálogos con precios</h3><p>Servicios, duración y paquetes ordenados y fáciles de leer.</p></li>
-<li><h3>Galerías y mapas</h3><p>Fotos que se amplían, carruseles y la ubicación del negocio.</p></li>
+<div class="how"><div class="wrap"><div class="how-head"><div><h2>Funciones a tu medida</h2><p class="lead">Cada sitio se diseña según las necesidades de tu negocio. Estas son algunas de las funciones que puedo integrar.</p></div><div class="arrows"><button type="button" id="prev" aria-label="Ver funciones anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" id="next" aria-label="Ver más funciones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+<ul id="funciones">
+<li><h3>Citas por WhatsApp</h3><p>Cada servicio o paquete puede abrir una conversación de WhatsApp con el mensaje prellenado.</p></li>
+<li><h3>Cotizadores</h3><p>El cliente selecciona áreas, servicios o número de invitados y solicita su cotización en un solo paso.</p></li>
+<li><h3>Catálogos con precios</h3><p>Servicios, duraciones y paquetes presentados con orden y claridad.</p></li>
+<li><h3>Galerías y mapas</h3><p>Fotografías ampliables, carruseles y ubicación del negocio integrada.</p></li>
+<li><h3>Identidad de marca</h3><p>Paleta, tipografía y estilo visual acordes a la personalidad de tu negocio.</p></li>
+<li><h3>Reseñas y promociones</h3><p>Testimonios de clientes y ofertas del mes para generar confianza y atraer ventas.</p></li>
+<li><h3>Experiencias interactivas</h3><p>Tests y formularios guiados que recomiendan servicios y facilitan la decisión.</p></li>
+<li><h3>Adaptado a cada pantalla</h3><p>Una navegación cómoda en celular, tableta y computadora.</p></li>
 </ul></div></div>
 <div class="wrap">
 <section id="proyectos">
-<h2>Páginas web</h2>
+<h2>Proyectos web</h2>
 <div class="grid">
 
 <article class="p" style="--h:285"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>farfallawellnessspa.github.io</span></div><a class="view" href="https://farfallawellnessspa.github.io/" target="_blank" rel="noopener" aria-label="Abrir farfallawellnessspa.github.io"><div class="fb"><strong>Farfalla Wellness Spa</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://farfallawellnessspa.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de farfallawellnessspa.github.io"></iframe></a></div>
-<div class="body"><h3>Farfalla Wellness Spa</h3><div class="k">Spa y estética</div><p>Faciales, láser, drenaje y tratamiento reductivo con precios por sesión y paquetes, promociones del mes y un cotizador de depilación láser por áreas.</p><ul class="chips"><li>Cotizador</li><li>Promociones</li><li>Citas por WhatsApp</li></ul><a href="https://farfallawellnessspa.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>Farfalla Wellness Spa</h3><div class="k">Spa y estética</div><p>Tratamientos faciales, láser, drenaje y reductivos con precios por sesión y por paquete, promociones mensuales y un cotizador de depilación láser por áreas.</p><ul class="chips"><li>Cotizador</li><li>Promociones</li><li>Citas por WhatsApp</li></ul><a href="https://farfallawellnessspa.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:335"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>lacasadelabelleza.github.io</span></div><a class="view" href="https://lacasadelabelleza.github.io/" target="_blank" rel="noopener" aria-label="Abrir lacasadelabelleza.github.io"><div class="fb"><strong>La Casa de la Belleza</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://lacasadelabelleza.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de lacasadelabelleza.github.io"></iframe></a></div>
-<div class="body"><h3>La Casa de la Belleza</h3><div class="k">Estética familiar unisex</div><p>Catálogo de más de 25 servicios que se despliegan, galería de trabajos con imagen ampliada y un «pase de entrada» para elegir servicios y cotizar por WhatsApp.</p><ul class="chips"><li>Catálogo desplegable</li><li>Galería</li><li>Formulario a WhatsApp</li></ul><a href="https://lacasadelabelleza.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>La Casa de la Belleza</h3><div class="k">Estética unisex para toda la familia</div><p>Catálogo desplegable con más de 25 servicios, galería de trabajos con imagen ampliada y un «pase de entrada» para seleccionar servicios y cotizar por WhatsApp.</p><ul class="chips"><li>Catálogo desplegable</li><li>Galería</li><li>Cotización por WhatsApp</li></ul><a href="https://lacasadelabelleza.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:200"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>smileoneweb.github.io</span></div><a class="view" href="https://smileoneweb.github.io/" target="_blank" rel="noopener" aria-label="Abrir smileoneweb.github.io"><div class="fb"><strong>Smile One</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://smileoneweb.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de smileoneweb.github.io"></iframe></a></div>
-<div class="body"><h3>Smile One</h3><div class="k">Clínica dental</div><p>Catálogo de 14 tratamientos, carrusel de fotos del consultorio, horarios, mapa y sistema de citas en línea.</p><ul class="chips"><li>Citas en línea</li><li>Carrusel</li><li>Mapa</li></ul><a href="https://smileoneweb.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>Smile One</h3><div class="k">Clínica dental</div><p>Catálogo de 14 tratamientos, carrusel fotográfico del consultorio, horarios de atención, mapa y sistema de citas en línea.</p><ul class="chips"><li>Citas en línea</li><li>Carrusel</li><li>Mapa</li></ul><a href="https://smileoneweb.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:155"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>serenityspabydg.github.io</span></div><a class="view" href="https://serenityspabydg.github.io/" target="_blank" rel="noopener" aria-label="Abrir serenityspabydg.github.io"><div class="fb"><strong>Serenity Spa DG</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://serenityspabydg.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de serenityspabydg.github.io"></iframe></a></div>
-<div class="body"><h3>Serenity Spa DG</h3><div class="k">Spa y terapia alternativa</div><p>Catálogo por categorías con duración y precio, paquetes, ceremonias holísticas y un test de 8 preguntas que recomienda el tratamiento ideal.</p><ul class="chips"><li>Test interactivo</li><li>Catálogo</li><li>Paquetes</li></ul><a href="https://serenityspabydg.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>Serenity Spa DG</h3><div class="k">Spa y terapias alternativas</div><p>Catálogo por categorías con duración y precio, paquetes, ceremonias holísticas y un test de 8 preguntas que recomienda el tratamiento más adecuado.</p><ul class="chips"><li>Test interactivo</li><li>Catálogo</li><li>Paquetes</li></ul><a href="https://serenityspabydg.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:42"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>niloluxuryspa.github.io</span></div><a class="view" href="https://niloluxuryspa.github.io/" target="_blank" rel="noopener" aria-label="Abrir niloluxuryspa.github.io"><div class="fb"><strong>Nilo Luxury Spa</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://niloluxuryspa.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de niloluxuryspa.github.io"></iframe></a></div>
-<div class="body"><h3>Nilo Luxury Spa</h3><div class="k">Spa de lujo</div><p>Sitio web para un spa de lujo.</p><ul class="chips"><li>Sitio web</li></ul><a href="https://niloluxuryspa.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>Nilo Luxury Spa</h3><div class="k">Spa de lujo</div><p>Sitio web de presentación para un spa de lujo, con diseño elegante y enfoque en la experiencia del cliente.</p><ul class="chips"><li>Sitio web</li></ul><a href="https://niloluxuryspa.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:22"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>beracaspa.github.io</span></div><a class="view" href="https://beracaspa.github.io/" target="_blank" rel="noopener" aria-label="Abrir beracaspa.github.io"><div class="fb"><strong>Beraca Spa</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://beracaspa.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de beracaspa.github.io"></iframe></a></div>
-<div class="body"><h3>Beraca Spa</h3><div class="k">Spa minimalista</div><p>Diseño sobrio con galerías de cabinas y tratamientos, servicios y paquetes (novia, faciales, cumpleaños), mapa y reserva directa por WhatsApp.</p><ul class="chips"><li>Galería</li><li>Paquetes</li><li>Mapa</li></ul><a href="https://beracaspa.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>Beraca Spa</h3><div class="k">Spa minimalista</div><p>Diseño sobrio con galerías de cabinas y tratamientos, catálogo de servicios, paquetes (novia, faciales, cumpleaños), mapa y reservación directa por WhatsApp.</p><ul class="chips"><li>Galería</li><li>Paquetes</li><li>Mapa</li></ul><a href="https://beracaspa.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:352"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>fresukiss.github.io</span></div><a class="view" href="https://fresukiss.github.io/" target="_blank" rel="noopener" aria-label="Abrir fresukiss.github.io"><div class="fb"><strong>FresuKiss</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://fresukiss.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de fresukiss.github.io"></iframe></a></div>
-<div class="body"><h3>FresuKiss</h3><div class="k">Barras de fresas, elotes y ramen para eventos</div><p>Precios por número de invitados para cada barra, reseñas, galería y un formulario de cotización de evento que abre WhatsApp con el mensaje listo.</p><ul class="chips"><li>Cotizador de eventos</li><li>Reseñas</li><li>Galería</li></ul><a href="https://fresukiss.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>FresuKiss</h3><div class="k">Barras de fresas, elotes y ramen para eventos</div><p>Precios por número de invitados para cada barra, reseñas de clientes, galería y un formulario de cotización para eventos que abre WhatsApp con el mensaje prellenado.</p><ul class="chips"><li>Cotizador de eventos</li><li>Reseñas</li><li>Galería</li></ul><a href="https://fresukiss.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 <article class="p" style="--h:305"><div class="mock"><div class="bar"><i></i><i></i><i></i><span>healmygirl.github.io</span></div><a class="view" href="https://healmygirl.github.io/" target="_blank" rel="noopener" aria-label="Abrir healmygirl.github.io"><div class="fb"><strong>Heal My Girl</strong><div class="sk"></div><div class="sk"></div><div class="pill"></div></div><iframe src="https://healmygirl.github.io/" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin" title="Vista previa de healmygirl.github.io"></iframe></a></div>
-<div class="body"><h3>Heal My Girl</h3><div class="k">Spa solo para mujeres</div><p>Paquetes de masaje y facial con cuarzos, sesiones de Barras de Access, guía de reserva en tres pasos y botón de WhatsApp por cada paquete.</p><ul class="chips"><li>Paquetes</li><li>Reserva en 3 pasos</li><li>WhatsApp</li></ul><a href="https://healmygirl.github.io/" target="_blank" rel="noopener">Ver sitio</a></div></article>
+<div class="body"><h3>Heal My Girl</h3><div class="k">Spa exclusivo para mujeres</div><p>Paquetes de masaje y facial con cuarzos, sesiones de Barras de Access, guía de reservación en tres pasos y botón de WhatsApp en cada paquete.</p><ul class="chips"><li>Paquetes</li><li>Reserva en 3 pasos</li><li>WhatsApp</li></ul><a href="https://healmygirl.github.io/" target="_blank" rel="noopener">Visitar sitio</a></div></article>
 
 </div>
 </section>
@@ -141,9 +155,9 @@ h2{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:300;letter-spacing:-.01em}
 </main>
 <footer class="contact" id="contacto">
 <div class="wrap">
-<h2>Hablemos</h2>
+<h2>Trabajemos juntos</h2>
 <a class="mail" href="mailto:rebecaortizflores00@gmail.com">rebecaortizflores00@gmail.com</a>
-<div class="btns"><a class="main" href="mailto:rebecaortizflores00@gmail.com">Escribirme</a><a href="tel:+528446747867">+52 (844) 674 7867</a><a href="https://www.linkedin.com/in/rebeca-ortiz-flores" target="_blank" rel="noopener">LinkedIn</a></div>
+<div class="btns"><a class="main" href="mailto:rebecaortizflores00@gmail.com">Enviar correo</a><a href="tel:+528446747867">+52 (844) 674 7867</a><a href="https://www.linkedin.com/in/rebeca-ortiz-flores" target="_blank" rel="noopener">LinkedIn</a></div>
 <p class="loc">Saltillo, Coahuila, México</p>
 <p class="sig">Powered by ROF ♡</p>
 </div>
@@ -151,6 +165,11 @@ h2{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:300;letter-spacing:-.01em}
 <script>
 function ajusta(){document.querySelectorAll(".view").forEach(function(v){var f=v.querySelector("iframe");if(f)f.style.transform="scale("+(v.clientWidth/1280)+")";});}
 ajusta();window.addEventListener("resize",ajusta);
+(function(){var ul=document.getElementById("funciones"),a=document.getElementById("prev"),b=document.getElementById("next");if(!ul)return;
+function est(){a.disabled=ul.scrollLeft<=2;b.disabled=ul.scrollLeft+ul.clientWidth>=ul.scrollWidth-2;}
+function ir(d){var w=ul.firstElementChild.offsetWidth,n=Math.max(1,Math.round(ul.clientWidth/w));var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;ul.scrollBy({left:d*n*w,behavior:r?"auto":"smooth"});}
+a.addEventListener("click",function(){ir(-1)});b.addEventListener("click",function(){ir(1)});
+ul.addEventListener("scroll",est,{passive:true});window.addEventListener("resize",est);est();})();
 document.getElementById("tema").addEventListener("click",function(){
 var r=document.documentElement,t=r.getAttribute("data-theme"),o=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;
 r.setAttribute("data-theme",o?"light":"dark");
